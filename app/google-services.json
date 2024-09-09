@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "410218860810",
+    "project_id": "api-intergrationv4",
+    "storage_bucket": "api-intergrationv4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410218860810:android:a8c9a73135a8a6fb7baaf3",
+        "android_client_info": {
+          "package_name": "com.kowal.api_intergrationv4"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1QgWNXqLq_d8WAzFQegGWJum_h12YNxQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

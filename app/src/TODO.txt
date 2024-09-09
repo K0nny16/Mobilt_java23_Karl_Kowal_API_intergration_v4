@@ -1,0 +1,49 @@
+
+API: OpenWeather
+
+-- G Krav --
+1: 4 Activites som följer bifogad bild.
+2: Backstack enligt bild (Man ska ej kunna backa efter main)
+3: Använd ett API och displaya datan som hämtas från det.
+4: 100% Kotlin (Ez)
+5: Skapa APK-fil (Ez)
+
+-- VG Krav -- (Mina 4)
+6: Back to home knapp som ränsar backstacken.
+7: Använd någon typ av databas (Auth med firebase)
+8: APK-fil som är signerad med keystore och bundler.
+9: Notifikationer när något inträffar som t.e.x att det börjar regna.
+
+-- Order -- (Checked when done)
+ 7 -> 4 -> 3 -> 1 -> 2 -> 6 -> 9 -> 5 -> 8
+6: Back to home knapp som ränsar backstacken.
+7: Använd någon typ av databas (Bara user prefs)
+4: 100% Kotlin (Ez)
+3: Använd ett API och displaya datan som hämtas från det.
+1: 4 Activites som följer bifogad bild.
+2: Backstack enligt bild (Man ska ej kunna backa efter main)
+9: Notifikationer när något inträffar som t.e.x att det börjar regna.
+5: Skapa APK-fil (Ez)
+8: APK-fil som är signerad med keystore och bundler.
+
+
+-- Övrigt --
+
+-- Struktur --
+Main page: Möjlighet att söka på en stad.
+Page 2: ser datan fårn staden med nav.
+Page 3: 3 - 5 dagars forcast
+Page 4: User settings (Ändra metrics, språk, notificationer, dark/light theme, mm)
+
+-- Dag 1 --
+* MainActivity där vi har en layout och även skickar med vilket stad som valdes med intentet. 2/2
+* WeatherActivity xml klar (behöver bara piff). Kotlin del inte klar 1/2
+* OpenWeahterAPI
+    Geo(Klar)
+    Struct(Klar)
+    CurrentWeather(Klar)
+
+* Slutrapport för dagen.
+Appen kan ta ett input och sedan visa väder datan. Samtliga funktioner fram till detta steget funkar stylen för den displayade sidan behöver dock snyggas till.
+
+-- Dag 2 --

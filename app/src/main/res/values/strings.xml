@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">API_IntergrationV4</string>
+    <string name="get_weather">Get Weather</string>
+    <string name="type_city_name">Type city name</string>
+    <string name="enter_city">Enter City</string>
+    <string name="city">City</string>
+    <string name="temp">Temp</string>
+    <string name="status">Status</string>
+    <string name="humidity">Humidity</string>
+    <string name="weather_icon">weather_icon</string>
+    <string name="description">Description</string>
+</resources>
