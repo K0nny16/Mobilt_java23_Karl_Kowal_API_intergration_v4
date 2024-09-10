@@ -2,14 +2,14 @@
 API: OpenWeather
 
 -- G Krav --
-1: 4 Activites som följer bifogad bild.
-2: Backstack enligt bild (Man ska ej kunna backa efter main)
-3: Använd ett API och displaya datan som hämtas från det.
-4: 100% Kotlin (Ez)
+--1: 4 Activites som följer bifogad bild. 4/4
+--2: Backstack enligt bild (Man ska ej kunna backa efter main) ?
+--3: Använd ett API och displaya datan som hämtas från det.
+--4: 100% Kotlin (Ez)
 5: Skapa APK-fil (Ez)
 
 -- VG Krav -- (Mina 4)
-6: Back to home knapp som ränsar backstacken.
+--6: Back to home knapp som ränsar backstacken.
 7: Använd någon typ av databas (Auth med firebase)
 8: APK-fil som är signerad med keystore och bundler.
 9: Notifikationer när något inträffar som t.e.x att det börjar regna.
@@ -45,5 +45,23 @@ Page 4: User settings (Ändra metrics, språk, notificationer, dark/light theme,
 
 * Slutrapport för dagen.
 Appen kan ta ett input och sedan visa väder datan. Samtliga funktioner fram till detta steget funkar stylen för den displayade sidan behöver dock snyggas till.
+(Git init klar och pushat)
 
 -- Dag 2 --
+*Rensar backstack på home knappen
+*Nav system
+*Forecast klar
+*SP så vi minskar mängden calls
+*Skapat ny dirs så det blir lättare att navigera
+*SettingsActivty Klar
+
+*Rapport för dagen
+Firebase krånglar försökte använda firestore men fick conflikt med dependencis. Har bytat till realtime men går inte så mycket bättre.
+Problemen som är kvar och som störst just nu är även fast jag spara metricen i SP så hämtar den inte i F.
+Andra är att jag inte lyckas posta till FB
+
+    -- Dag 3 --
+    Punkter för idag
+1.Posta prefs till FB
+2.Hämta datan med ny metric
+3.Notifikationer
