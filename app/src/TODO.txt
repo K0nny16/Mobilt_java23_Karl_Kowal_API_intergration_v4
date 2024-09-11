@@ -10,7 +10,7 @@ API: OpenWeather
 
 -- VG Krav -- (Mina 4)
 --6: Back to home knapp som ränsar backstacken.
-7: Använd någon typ av databas (Auth med firebase)
+--7: Använd någon typ av databas (Auth med firebase)
 8: APK-fil som är signerad med keystore och bundler.
 9: Notifikationer när något inträffar som t.e.x att det börjar regna.
 
@@ -62,6 +62,8 @@ Andra är att jag inte lyckas posta till FB
 
     -- Dag 3 --
     Punkter för idag
-1.Posta prefs till FB
-2.Hämta datan med ny metric
+1.Posta prefs till FB (Klar)
+2.Hämta datan med ny metric (Klar)
 3.Notifikationer
+
+*Fixat sharedPreferences

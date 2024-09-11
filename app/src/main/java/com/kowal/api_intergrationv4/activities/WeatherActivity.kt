@@ -1,5 +1,6 @@
 package com.kowal.api_intergrationv4.activities
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
@@ -46,19 +47,12 @@ class WeatherActivity : AppCompatActivity() {
         val cityName = intent.getStringExtra("City_name")
 
         if (savedLat != null && savedLon != null) {
-            // Om koordinaterna finns, använd dem för att hämta vädret
+            // Om koordinaterna finns alltså om man bara har bytat Activity och går tillbaka
             tvCityName.text = buildString {
                 append("Location: ")
                 append(savedCity)
             }
             getWeatherForCoordinates(savedLat, savedLon)
-        } else if (savedCity != null) {
-            // Om stadsnamnet finns men inte koordinater, använd stadsnamnet för att hämta vädret
-            tvCityName.text = buildString {
-                append("Location: ")
-                append(savedCity)
-            }
-            getWeatherForCity(savedCity)
         } else {
             // Om inget är sparat, använd stadens namn från intentet
             if (cityName != null) {
@@ -74,6 +68,8 @@ class WeatherActivity : AppCompatActivity() {
     }
     // Metod för att hämta väder med stadens namn
     private fun getWeatherForCity(cityName: String) {
+        //Säker ställer att coroutinen avbryts när activityn eller fragmentet förstörs.
+        //Kör också anropen Async vilket gör att UI tråden kan vara mer responsiv.
         lifecycleScope.launch {
             try {
                 val (lat, lon) = weatherService.getCords(cityName)
@@ -106,9 +102,12 @@ class WeatherActivity : AppCompatActivity() {
     }
     // Uppdaterar UI med väderdata
     private fun updateUI(weatherData: WeatherData) {
+        val sharedPreferences = getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        val metric = sharedPreferences.getString("metric", "C")
         tvTemp.text = buildString {
             append("Temp: ")
             append(weatherData.temp)
+            append(if(metric == "F")"°F" else "°C")
         }
         tvWeatherStatus.text = buildString {
             append("Status: ")

@@ -1,4 +1,5 @@
 package com.kowal.api_intergrationv4
+
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
@@ -18,12 +19,14 @@ class OpenWeatherAPI(private val context: Context) {
     private val apiKey = "6e86d40c1ccec69010c71630afb27d8c"
     private val requestQueue = Volley.newRequestQueue(context)
 
-    // Hämtar enhet för temperatur (Celsius/Fahrenheit) från SharedPreferences
+    // Hämtar enhet för temperatur (Celsius/Fahrenheit) från SharedPreferences så vi kan få rätt enhet
     private fun getMetricFromPreferences(): String {
-        val sharedPreferences = context.getSharedPreferences("app_settings", Context.MODE_PRIVATE)
-        return sharedPreferences.getString("temperature_metric", "metric") ?: "metric"
+        val sharedPreferences = context.getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+        val metric = sharedPreferences.getString("metric", "C")
+        return if (metric == "F") "imperial" else "metric"
     }
     // Funktion för att hämta koordinater baserat på stadsnamn
+    //Gör functionen Async med coroutine. Samt låter oss även avbryta eller fortsätta med ett önskat utfall.
     suspend fun getCords(cityName: String): Pair<Double, Double> = suspendCancellableCoroutine { continuation ->
         val url = "https://api.openweathermap.org/geo/1.0/direct?q=$cityName&limit=1&appid=$apiKey"
         val stringRequest = StringRequest(
@@ -34,7 +37,6 @@ class OpenWeatherAPI(private val context: Context) {
                         val jsonObject = jsonArray.getJSONObject(0)
                         val lat = jsonObject.getDouble("lat")
                         val lon = jsonObject.getDouble("lon")
-
                         continuation.resume(Pair(lat, lon))
                     }
                 } catch (e: Exception) {
@@ -50,10 +52,10 @@ class OpenWeatherAPI(private val context: Context) {
         requestQueue.add(stringRequest)
         continuation.invokeOnCancellation { stringRequest.cancel() }
     }
-
     // Funktion för att hämta väderdata baserat på latitud och longitud
     suspend fun getWeather(lat: Double, lon: Double): WeatherData = suspendCancellableCoroutine { continuation ->
         val metric = getMetricFromPreferences()
+        Log.d("metric", ":$metric")
         val url = "https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$apiKey&units=$metric"
         val stringRequest = StringRequest(
             Request.Method.GET, url, { response ->
@@ -62,13 +64,11 @@ class OpenWeatherAPI(private val context: Context) {
                     val main = jsonObject.getJSONObject("main")
                     val temp = main.getDouble("temp")
                     val humidity = main.getInt("humidity")
-
                     val weatherArray = jsonObject.getJSONArray("weather")
                     val weatherObject = weatherArray.getJSONObject(0)
                     val description = weatherObject.getString("description")
                     val mainWeather = weatherObject.getString("main")
                     val icon = weatherObject.getString("icon")
-
                     val weatherData = WeatherData(
                         temp,
                         humidity,
@@ -76,7 +76,6 @@ class OpenWeatherAPI(private val context: Context) {
                         mainWeather,
                         icon
                     )
-
                     continuation.resume(weatherData)
                 } catch (e: Exception) {
                     continuation.resumeWithException(e)
@@ -95,6 +94,7 @@ class OpenWeatherAPI(private val context: Context) {
         val sharedPreferences = context.getSharedPreferences("cords", Context.MODE_PRIVATE)
         val lat = sharedPreferences.getString("lat", null)
         val lon = sharedPreferences.getString("lon", null)
+
         if (lat != null && lon != null) {
             val metric = getMetricFromPreferences()
             val url = "https://api.openweathermap.org/data/2.5/forecast?lat=$lat&lon=$lon&appid=$apiKey&units=$metric"

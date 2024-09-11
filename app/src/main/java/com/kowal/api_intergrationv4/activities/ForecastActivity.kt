@@ -2,13 +2,13 @@ package com.kowal.api_intergrationv4.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kowal.api_intergrationv4.utils.ForecastAdapter
 import com.kowal.api_intergrationv4.OpenWeatherAPI
 import com.kowal.api_intergrationv4.R
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class ForecastActivity : AppCompatActivity() {
@@ -25,9 +25,10 @@ class ForecastActivity : AppCompatActivity() {
 
         fetchForecastData()
     }
-
+    //Händer inte mycket här eftersom att 90% av koden ligger i ForecastAdapter.
+    //Dispatchers.main gör att vi kan updatera komponenterna efter att ha hämtat datan.
     private fun fetchForecastData(){
-        GlobalScope.launch(Dispatchers.Main) {
+        lifecycleScope.launch(Dispatchers.Main) {
             try {
                 val forecastList = weatherService.getFiveDayForecast()
                 recycler.adapter = ForecastAdapter(forecastList)
