@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity() {
         with(sharedPreferences.edit()) {
             putString("temperature_metric", preferences.metric) // Spara metriska enheter i SharedPreferences
             putBoolean("notifications",preferences.notificationEnabled) //Om man vill ha notiser på.
-            putString("update_interval",preferences.updateInterval) //Updaterings interval för när det körs i bakgrunden ifall man har notiser på.
             apply()
         }
     }

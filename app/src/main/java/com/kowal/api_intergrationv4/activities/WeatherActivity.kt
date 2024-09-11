@@ -1,16 +1,29 @@
 package com.kowal.api_intergrationv4.activities
 
+import android.Manifest
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.RemoteViews
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.lifecycleScope
 import com.kowal.api_intergrationv4.OpenWeatherAPI
 import com.kowal.api_intergrationv4.R
 import com.kowal.api_intergrationv4.utils.Utils.Companion.capitalizeFirstLetter
 import com.kowal.api_intergrationv4.dto.WeatherData
+import com.kowal.api_intergrationv4.utils.NotificationHelper
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 
@@ -61,8 +74,6 @@ class WeatherActivity : AppCompatActivity() {
                     append(cityName)
                 }
                 getWeatherForCity(cityName)
-            } else {
-                tvCityName.text = "Location: N/A"
             }
         }
     }
@@ -124,5 +135,11 @@ class WeatherActivity : AppCompatActivity() {
         }
         val iconURL = "https://openweathermap.org/img/wn/${weatherData.icon}@2x.png"
         Picasso.get().load(iconURL).into(ivIcon)
+        val notice = sharedPreferences.getBoolean("notifications_enabled",true)
+        Log.d("Notice","$notice")
+        if(notice &&(weatherData.mainWeather == "Rain" || weatherData.description.contains("rain",true))){
+            val notificationHelper = NotificationHelper(this)
+            notificationHelper.sendSimpleNotification()
+        }
     }
 }

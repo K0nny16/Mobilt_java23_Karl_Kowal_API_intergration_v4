@@ -12,7 +12,8 @@ API: OpenWeather
 --6: Back to home knapp som ränsar backstacken.
 --7: Använd någon typ av databas (Auth med firebase)
 8: APK-fil som är signerad med keystore och bundler.
-9: Notifikationer när något inträffar som t.e.x att det börjar regna.
+9: Notifikation när det regnar.
+(10: Använd en library från en fil & implementar den.)
 
 -- Order -- (Checked when done)
  7 -> 4 -> 3 -> 1 -> 2 -> 6 -> 9 -> 5 -> 8

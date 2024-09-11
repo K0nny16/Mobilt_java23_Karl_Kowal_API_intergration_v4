@@ -42,7 +42,6 @@ class FirebaseHelper(private val context: Context) {
         val sharedPref = context.getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
         with(sharedPref.edit()) {
             putBoolean("notifications_enabled", preferences.notificationEnabled)
-            putString("update_interval", preferences.updateInterval)
             putString("metric", preferences.metric)
             apply()
         }
@@ -52,7 +51,6 @@ class FirebaseHelper(private val context: Context) {
         val sharedPref = context.getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
         return UserPreferences(
             sharedPref.getBoolean("notifications_enabled", true),
-            sharedPref.getString("update_interval", "1 hour") ?: "1 hour",
             sharedPref.getString("metric", "C") ?: "C"
         )
     }
