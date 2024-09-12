@@ -1,5 +1,6 @@
 package com.kowal.api_intergrationv4.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,6 +31,8 @@ class NavigationBar: Fragment() {
         btnHome.setOnClickListener {
             //Tömmer/Raderar SP
             val sharedPreferences = activity?.getSharedPreferences("cords",android.content.Context.MODE_PRIVATE)
+            val prefs = activity?.getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+            prefs?.edit()?.clear()?.apply()
             sharedPreferences?.edit()?.clear()?.apply()
             //Rensar stacken och gör den nya activityn till roten av stacket.
             val intent = Intent(activity, MainActivity::class.java)
