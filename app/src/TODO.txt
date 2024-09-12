@@ -9,7 +9,7 @@ API: OpenWeather
 --5: Skapa APK-fil (Ez)
 
 -- VG Krav -- (Mina 4)
---6: Back to home knapp som ränsar backstacken. Inte ok
+--6: Back to home knapp som ränsar backstacken.
 --7: Använd någon typ av databas (Auth med firebase)
 --8: APK-fil som är signerad med keystore och bundler.
 --9: Notifikation när det regnar.
